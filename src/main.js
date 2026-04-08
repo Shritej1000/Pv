@@ -29,6 +29,10 @@ async function init() {
 
 // Fetch posts from Supabase
 async function fetchPosts() {
+  if (!supabase) {
+    console.warn('Supabase not initialized. Fetching skipped.');
+    return;
+  }
   const { data, error } = await supabase
     .from('posts')
     .select('*')
@@ -117,6 +121,11 @@ async function submitPost() {
 
   if (!subject || !message) {
     showToast('Please fill in subject and message');
+    return;
+  }
+
+  if (!supabase) {
+    showToast('Backend not configured. Set environment variables on Vercel.');
     return;
   }
 
