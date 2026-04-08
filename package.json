@@ -1,0 +1,19 @@
+{
+  "name": "the-public-record",
+  "private": true,
+  "version": "1.0.0",
+  "description": "A civic engagement platform for public record and accountability.",
+  "author": "The Public Record Team",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^6.0.0"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.40.0"
+  }
+}

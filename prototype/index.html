@@ -1,0 +1,412 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Manrope:wght@300;400;500;600&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0a0a0a;
+    --ink-2: #2a2a2a;
+    --ink-3: #555;
+    --ink-4: #888;
+    --paper: #ffffff;
+    --paper-2: #f8f7f5;
+    --paper-3: #f0eeea;
+    --rule: rgba(0,0,0,0.1);
+    --rule-strong: rgba(0,0,0,0.22);
+    --font-display: 'Merriweather', Georgia, serif;
+    --font-body: 'Manrope', system-ui, sans-serif;
+  }
+
+  body { background: var(--paper); font-family: var(--font-body); color: var(--ink); }
+
+  .platform { max-width: 900px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+
+  /* Header */
+  .site-header {
+    border-bottom: 1px solid var(--rule-strong);
+    padding: 1.5rem 0 1.25rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .site-title { font-family: var(--font-display); font-size: 1.15rem; font-weight: 500; letter-spacing: 0.01em; }
+  .site-tagline { font-size: 11px; color: var(--ink-4); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 2px; }
+  .header-badge {
+    font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase;
+    border: 1px solid var(--ink); padding: 5px 12px; border-radius: 8px; color: var(--ink);
+    cursor: pointer; font-family: var(--font-body); background: transparent;
+    transition: all 0.2s ease;
+  }
+  .header-badge:hover { background: var(--ink); color: var(--paper); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+  .header-badge:active { transform: translateY(0); }
+
+  /* Hero strip */
+  .hero {
+    padding: 3.5rem 0 2.5rem;
+    border-bottom: 1px solid var(--rule);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: end;
+  }
+  .hero-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-4); margin-bottom: 0.75rem; }
+  .hero-headline { font-family: var(--font-display); font-size: 2.6rem; line-height: 1.15; font-weight: 700; }
+  .hero-sub { font-size: 0.9rem; color: var(--ink-3); line-height: 1.65; max-width: 320px; }
+  .constituency-select-wrap { position: relative; }
+  .constituency-select-wrap label { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-4); display: block; margin-bottom: 0.5rem; }
+  .constituency-select {
+    width: 100%; padding: 12px 14px; font-size: 0.88rem; font-family: var(--font-body);
+    border: 1px solid var(--rule-strong); background: var(--paper); color: var(--ink);
+    border-radius: 8px; appearance: none; cursor: pointer; outline: none;
+  }
+  .constituency-select:focus { border-color: var(--ink); }
+  .select-arrow { position: absolute; right: 14px; bottom: 13px; pointer-events: none; font-size: 10px; color: var(--ink-3); }
+
+  /* Stats bar */
+  .stats-bar {
+    display: flex; gap: 0; border: 1px solid var(--rule-strong); margin: 2rem 0;
+    border-radius: 8px; overflow: hidden;
+  }
+  .stat-cell {
+    flex: 1; padding: 1rem 1.25rem; border-right: 1px solid var(--rule-strong);
+    position: relative;
+  }
+  .stat-cell:last-child { border-right: none; }
+  .stat-num { font-family: var(--font-display); font-size: 1.8rem; font-weight: 700; }
+  .stat-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--ink-4); margin-top: 3px; }
+  .stat-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 5px; vertical-align: middle; }
+  .dot-complaint { background: var(--ink-2); }
+  .dot-suggestion { background: var(--ink-4); }
+  .dot-appreciation { background: var(--ink-3); }
+
+  /* Tab nav */
+  .tab-nav { display: flex; border-bottom: 1px solid var(--rule-strong); margin-bottom: 2rem; gap: 0; }
+  .tab-btn {
+    padding: 0.75rem 1.4rem; font-size: 0.82rem; letter-spacing: 0.05em; text-transform: uppercase;
+    font-family: var(--font-body); background: none; border: none; cursor: pointer;
+    color: var(--ink-4); border-bottom: 2px solid transparent; margin-bottom: -1px;
+    transition: all 0.2s ease;
+  }
+  .tab-btn.active { color: var(--ink); border-bottom-color: var(--ink); }
+  .tab-btn:hover:not(.active) { color: var(--ink-2); transform: translateY(-1px); }
+
+  /* Post form */
+  .post-form {
+    background: var(--paper-2); border: 1px solid var(--rule); padding: 1.75rem;
+    border-radius: 8px; margin-bottom: 2rem;
+  }
+  .form-title { font-family: var(--font-display); font-size: 1.1rem; font-weight: 500; margin-bottom: 1.25rem; }
+  .form-row { margin-bottom: 1rem; }
+  .form-row label { font-size: 11px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink-4); display: block; margin-bottom: 0.4rem; }
+  .form-input, .form-textarea, .form-select {
+    width: 100%; padding: 10px 12px; font-size: 0.87rem; font-family: var(--font-body);
+    border: 1px solid var(--rule-strong); background: var(--paper); color: var(--ink);
+    border-radius: 8px; outline: none; transition: all 0.2s ease;
+  }
+  .form-input:focus, .form-textarea:focus, .form-select:focus { border-color: var(--ink); box-shadow: 0 0 0 3px rgba(0,0,0,0.03); }
+  .form-textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
+  .form-row-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .type-selector { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .type-pill {
+    padding: 6px 14px; font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase;
+    border: 1px solid var(--rule-strong); border-radius: 8px; cursor: pointer;
+    font-family: var(--font-body); background: var(--paper); color: var(--ink-3);
+    transition: all 0.2s ease;
+  }
+  .type-pill.selected { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .type-pill:hover:not(.selected) { border-color: var(--ink); color: var(--ink); transform: translateY(-1px); }
+  .submit-btn {
+    background: var(--ink); color: var(--paper); border: none; padding: 11px 24px;
+    font-size: 0.82rem; letter-spacing: 0.07em; text-transform: uppercase;
+    font-family: var(--font-body); cursor: pointer; border-radius: 8px; margin-top: 0.5rem;
+    transition: all 0.2s ease;
+  }
+  .submit-btn:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+  .submit-btn:active { transform: translateY(0); }
+
+  /* Post cards */
+  .posts-section h2 { font-family: var(--font-display); font-size: 1.15rem; font-weight: 500; margin-bottom: 1.25rem; color: var(--ink-2); }
+  .post-card {
+    border: 1px solid var(--rule); padding: 1.4rem 1.6rem; margin-bottom: 1rem;
+    border-radius: 8px; background: var(--paper); transition: all 0.2s ease;
+    position: relative;
+  }
+  .post-card:hover { border-color: var(--rule-strong); transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+  .post-card-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 0.6rem; }
+  .post-type-tag {
+    font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; font-weight: 500;
+    padding: 3px 9px; border-radius: 8px; border: 1px solid currentColor; line-height: 1.5;
+  }
+  .tag-complaint { color: #222; }
+  .tag-suggestion { color: #555; }
+  .tag-appreciation { color: #777; }
+  .post-meta { font-size: 12px; color: var(--ink-4); text-align: right; line-height: 1.5; }
+  .post-name { font-size: 0.88rem; font-weight: 500; color: var(--ink-2); margin-bottom: 0.3rem; }
+  .post-body { font-size: 0.88rem; color: var(--ink-3); line-height: 1.65; }
+  .post-footer { display: flex; align-items: center; gap: 1rem; margin-top: 0.9rem; padding-top: 0.9rem; border-top: 1px solid var(--rule); }
+  .vote-btn {
+    display: flex; align-items: center; gap: 5px; font-size: 11px; letter-spacing: 0.05em;
+    text-transform: uppercase; color: var(--ink-4); background: none; border: none;
+    cursor: pointer; font-family: var(--font-body); transition: all 0.2s ease; padding: 0;
+  }
+  .vote-btn:hover { color: var(--ink); transform: scale(1.05); }
+  .vote-btn.voted { color: var(--ink); font-weight: 500; }
+  .vote-icon { font-size: 13px; }
+  .constituency-tag { font-size: 11px; color: var(--ink-4); margin-left: auto; }
+
+  /* Filter bar */
+  .filter-bar { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; align-items: center; }
+  .filter-chip {
+    padding: 5px 13px; font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase;
+    border: 1px solid var(--rule-strong); border-radius: 8px; cursor: pointer;
+    font-family: var(--font-body); background: var(--paper); color: var(--ink-4);
+    transition: all 0.2s ease;
+  }
+  .filter-chip.active { background: var(--ink-2); color: var(--paper); border-color: var(--ink-2); }
+  .filter-chip:hover:not(.active) { border-color: var(--ink); color: var(--ink); transform: translateY(-1px); }
+  .filter-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--ink-4); }
+  .search-input {
+    margin-left: auto; padding: 5px 12px; font-size: 12px; font-family: var(--font-body);
+    border: 1px solid var(--rule-strong); border-radius: 8px; outline: none; color: var(--ink);
+    width: 180px; transition: all 0.2s ease; background: var(--paper);
+  }
+  .search-input:focus { border-color: var(--ink); box-shadow: 0 0 0 3px rgba(0,0,0,0.03); }
+
+  /* Empty */
+  .empty-state { padding: 3rem; text-align: center; color: var(--ink-4); font-size: 0.88rem; border: 1px dashed var(--rule-strong); border-radius: 8px; }
+
+  /* Toast */
+  .toast {
+    position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(80px);
+    background: var(--ink); color: var(--paper); padding: 11px 22px;
+    font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; border-radius: 8px;
+    transition: transform 0.3s; z-index: 100; white-space: nowrap; font-family: var(--font-body);
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* Responsive */
+  @media(max-width: 640px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-headline { font-size: 2rem; }
+    .form-row-grid { grid-template-columns: 1fr; }
+    .stats-bar { flex-direction: column; }
+    .stat-cell { border-right: none; border-bottom: 1px solid var(--rule-strong); }
+    .stat-cell:last-child { border-bottom: none; }
+  }
+</style>
+
+<div class="platform">
+  <header class="site-header">
+    <div>
+      <div class="site-title">The Public Record</div>
+      <div class="site-tagline">Civic voice · Your constituency · Your leader</div>
+    </div>
+    <button class="header-badge" onclick="document.getElementById('post-form').scrollIntoView({behavior:'smooth'})">Share your voice</button>
+  </header>
+
+  <section class="hero">
+    <div>
+      <div class="hero-label">A civic platform</div>
+      <h1 class="hero-headline">Speak to<br>your leader.</h1>
+    </div>
+    <div>
+      <p class="hero-sub" style="margin-bottom:1.25rem">Complaints. Suggestions. Appreciation. Every voice on record — addressed to the representative of your constituency.</p>
+      <div class="constituency-select-wrap">
+        <label>Select your constituency</label>
+        <select class="constituency-select" id="constFilter">
+          <option value="all">All Constituencies</option>
+          <option>Kolhapur North</option>
+          <option>Kolhapur South</option>
+          <option>Karveer</option>
+          <option>Panhala</option>
+          <option>Shahuwadi</option>
+          <option>Kagal</option>
+          <option>Gadhinglaj</option>
+          <option>Radhanagari</option>
+        </select>
+        <span class="select-arrow">▼</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="stats-bar" id="statsBar">
+    <div class="stat-cell">
+      <div class="stat-num" id="totalCount">0</div>
+      <div class="stat-lbl">Total posts</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num" id="complaintCount">0</div>
+      <div class="stat-lbl"><span class="stat-dot dot-complaint"></span>Complaints</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num" id="suggestionCount">0</div>
+      <div class="stat-lbl"><span class="stat-dot dot-suggestion"></span>Suggestions</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num" id="appreciationCount">0</div>
+      <div class="stat-lbl"><span class="stat-dot dot-appreciation"></span>Appreciations</div>
+    </div>
+  </div>
+
+  <!-- Post Form -->
+  <div class="post-form" id="post-form">
+    <div class="form-title">Submit your post</div>
+    <div class="form-row">
+      <label>Type of post</label>
+      <div class="type-selector">
+        <button class="type-pill selected" data-type="Complaint" onclick="selectType(this)">Complaint</button>
+        <button class="type-pill" data-type="Suggestion" onclick="selectType(this)">Suggestion</button>
+        <button class="type-pill" data-type="Appreciation" onclick="selectType(this)">Appreciation</button>
+      </div>
+    </div>
+    <div class="form-row-grid">
+      <div class="form-row" style="margin-bottom:0">
+        <label>Your name (optional)</label>
+        <input class="form-input" id="inputName" placeholder="Anonymous" />
+      </div>
+      <div class="form-row" style="margin-bottom:0">
+        <label>Constituency</label>
+        <select class="form-select" id="inputConst">
+          <option>Kolhapur North</option>
+          <option>Kolhapur South</option>
+          <option>Karveer</option>
+          <option>Panhala</option>
+          <option>Shahuwadi</option>
+          <option>Kagal</option>
+          <option>Gadhinglaj</option>
+          <option>Radhanagari</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row" style="margin-top:1rem">
+      <label>Subject</label>
+      <input class="form-input" id="inputSubject" placeholder="Brief subject line…" />
+    </div>
+    <div class="form-row">
+      <label>Your message</label>
+      <textarea class="form-textarea" id="inputMessage" placeholder="Write your complaint, suggestion, or appreciation in detail…"></textarea>
+    </div>
+    <button class="submit-btn" onclick="submitPost()">Submit post →</button>
+  </div>
+
+  <!-- Posts Feed -->
+  <div class="posts-section">
+    <div class="filter-bar">
+      <span class="filter-label">Filter:</span>
+      <button class="filter-chip active" data-filter="all" onclick="setFilter(this)">All</button>
+      <button class="filter-chip" data-filter="Complaint" onclick="setFilter(this)">Complaints</button>
+      <button class="filter-chip" data-filter="Suggestion" onclick="setFilter(this)">Suggestions</button>
+      <button class="filter-chip" data-filter="Appreciation" onclick="setFilter(this)">Appreciations</button>
+      <input class="search-input" id="searchInput" placeholder="Search posts…" oninput="renderPosts()" />
+    </div>
+    <h2 id="feedTitle">Public Record</h2>
+    <div id="postsFeed"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast">Post submitted to the public record</div>
+
+<script>
+let selectedType = 'Complaint';
+let activeFilter = 'all';
+let votes = {};
+
+let posts = [
+  { id:1, type:'Complaint', name:'Rahul M.', constituency:'Kolhapur North', subject:'Broken street lights on Mahadwar Road', body:'The street lights on Mahadwar Road have been non-functional for over two months. This poses a serious safety hazard, especially for pedestrians and two-wheeler commuters at night. Multiple complaints have been filed but no action taken.', date:'Apr 5, 2026', upvotes:24 },
+  { id:2, type:'Suggestion', name:'Priya S.', constituency:'Shahuwadi', subject:'Need more green public spaces', body:'Shahuwadi has grown enormously but lacks adequate parks and open spaces. I suggest the local authority identify vacant lots and convert them into small neighbourhood gardens. This would greatly improve quality of life for residents.', date:'Apr 6, 2026', upvotes:18 },
+  { id:3, type:'Appreciation', name:'Amit D.', constituency:'Panhala', subject:'Thank you for the new community hall', body:'The newly inaugurated community hall in Panhala is a wonderful addition to our neighbourhood. It has already hosted several cultural events and serves as a gathering space for residents. We are truly grateful for this initiative.', date:'Apr 7, 2026', upvotes:31 },
+  { id:4, type:'Complaint', name:'Sunita K.', constituency:'Gadhinglaj', subject:'Garbage collection irregular for weeks', body:'Waste collection in our ward has been irregular for the past three weeks. Garbage is piling up on street corners, leading to stench and health concerns. We urge immediate restoration of daily pickup services.', date:'Apr 7, 2026', upvotes:42 },
+  { id:5, type:'Suggestion', name:'Vikram T.', constituency:'Kagal', subject:'Dedicated cycling lanes needed urgently', body:'With increasing traffic, a dedicated cycle track along Rankala Lake would encourage more people to commute by cycle, reduce congestion and pollution. Global cities have shown this works. Our constituency can lead by example.', date:'Apr 8, 2026', upvotes:15 },
+];
+let nextId = 6;
+
+function selectType(el) {
+  document.querySelectorAll('.type-pill').forEach(p => p.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedType = el.dataset.type;
+}
+
+function setFilter(el) {
+  document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  activeFilter = el.dataset.filter;
+  renderPosts();
+}
+
+function updateStats() {
+  const all = posts;
+  document.getElementById('totalCount').textContent = all.length;
+  document.getElementById('complaintCount').textContent = all.filter(p=>p.type==='Complaint').length;
+  document.getElementById('suggestionCount').textContent = all.filter(p=>p.type==='Suggestion').length;
+  document.getElementById('appreciationCount').textContent = all.filter(p=>p.type==='Appreciation').length;
+}
+
+function renderPosts() {
+  const constFilter = document.getElementById('constFilter').value;
+  const search = document.getElementById('searchInput').value.toLowerCase();
+  let filtered = posts.filter(p => {
+    if(activeFilter !== 'all' && p.type !== activeFilter) return false;
+    if(constFilter !== 'all' && p.constituency !== constFilter) return false;
+    if(search && !p.subject.toLowerCase().includes(search) && !p.body.toLowerCase().includes(search) && !p.name.toLowerCase().includes(search)) return false;
+    return true;
+  });
+  filtered = [...filtered].reverse();
+  const feed = document.getElementById('postsFeed');
+  const title = document.getElementById('feedTitle');
+  title.textContent = filtered.length === 0 ? 'No posts found' : (activeFilter === 'all' ? 'Public Record' : activeFilter + 's');
+  if(filtered.length === 0) {
+    feed.innerHTML = '<div class="empty-state">No posts match your current filter.</div>';
+    return;
+  }
+  feed.innerHTML = filtered.map(p => {
+    const tagClass = 'tag-' + p.type.toLowerCase();
+    const voted = votes[p.id];
+    const voteCount = p.upvotes + (voted ? 1 : 0);
+    return `<div class="post-card">
+      <div class="post-card-header">
+        <span class="post-type-tag ${tagClass}">${p.type}</span>
+        <div class="post-meta">${p.date}<br>${p.constituency}</div>
+      </div>
+      <div class="post-name">${p.subject}</div>
+      <div class="post-body">${p.body}</div>
+      <div class="post-footer">
+        <button class="vote-btn ${voted ? 'voted' : ''}" onclick="toggleVote(${p.id}, this)">
+          <span class="vote-icon">${voted ? '▲' : '△'}</span> <span>${voteCount}</span>
+        </button>
+        <span class="constituency-tag">— ${p.name}</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function toggleVote(id, btn) {
+  votes[id] = !votes[id];
+  renderPosts();
+}
+
+function submitPost() {
+  const subject = document.getElementById('inputSubject').value.trim();
+  const message = document.getElementById('inputMessage').value.trim();
+  if(!subject || !message) { showToast('Please fill in subject and message'); return; }
+  const name = document.getElementById('inputName').value.trim() || 'Anonymous';
+  const constituency = document.getElementById('inputConst').value;
+  const now = new Date();
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const date = months[now.getMonth()] + ' ' + now.getDate() + ', ' + now.getFullYear();
+  posts.push({ id: nextId++, type: selectedType, name, constituency, subject, body: message, date, upvotes: 0 });
+  document.getElementById('inputName').value = '';
+  document.getElementById('inputSubject').value = '';
+  document.getElementById('inputMessage').value = '';
+  updateStats();
+  renderPosts();
+  showToast('Post submitted to the public record');
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+document.getElementById('constFilter').addEventListener('change', renderPosts);
+
+updateStats();
+renderPosts();
+</script>

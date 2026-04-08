@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Public Record | Speak to your Constituency Leaders</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="stylesheet" href="/src/styles/main.css">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="The Public Record is a civic engagement platform where citizens from Kolhapur and beyond can submit complaints, suggestions, and appreciation directly to their constituency leaders.">
+    <meta name="keywords" content="civic engagement, public record, kolhapur politics, constituency feedback, citizen voice">
+    <meta name="author" content="The Public Record Team">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://thepublicrecord.org/">
+    <meta property="og:title" content="The Public Record | Speak to your Constituency Leaders">
+    <meta property="og:description" content="Submit complaints, suggestions, and appreciation for your constituency. Every voice on record.">
+    <meta property="og:image" content="/og-image.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://thepublicrecord.org/">
+    <meta property="twitter:title" content="The Public Record | Speak to your Constituency Leaders">
+    <meta property="twitter:description" content="Submit complaints, suggestions, and appreciation for your constituency. Every voice on record.">
+    <meta property="twitter:image" content="/og-image.png">
+</head>
+<body>
+    <div class="platform">
+        <header class="site-header">
+            <div>
+                <div class="site-title">The Public Record</div>
+                <div class="site-tagline">Civic voice · Your constituency · Your leader</div>
+            </div>
+            <button class="header-badge" id="scrollToForm">Share your voice</button>
+        </header>
+
+        <section class="hero">
+            <div>
+                <div class="hero-label">A civic platform</div>
+                <h1 class="hero-headline">Speak to<br>your leader.</h1>
+            </div>
+            <div>
+                <p class="hero-sub" style="margin-bottom:1.25rem">Complaints. Suggestions. Appreciation. Every voice on record — addressed to the representative of your constituency.</p>
+                <div class="constituency-select-wrap">
+                    <label>Select your constituency</label>
+                    <select class="constituency-select" id="constFilter">
+                        <option value="all">All Constituencies</option>
+                        <option>Kolhapur North</option>
+                        <option>Kolhapur South</option>
+                        <option>Karveer</option>
+                        <option>Panhala</option>
+                        <option>Shahuwadi</option>
+                        <option>Kagal</option>
+                        <option>Gadhinglaj</option>
+                        <option>Radhanagari</option>
+                    </select>
+                    <span class="select-arrow">▼</span>
+                </div>
+            </div>
+        </section>
+
+        <div class="stats-bar" id="statsBar">
+            <div class="stat-cell">
+                <div class="stat-num" id="totalCount">0</div>
+                <div class="stat-lbl">Total posts</div>
+            </div>
+            <div class="stat-cell">
+                <div class="stat-num" id="complaintCount">0</div>
+                <div class="stat-lbl"><span class="stat-dot dot-complaint"></span>Complaints</div>
+            </div>
+            <div class="stat-cell">
+                <div class="stat-num" id="suggestionCount">0</div>
+                <div class="stat-lbl"><span class="stat-dot dot-suggestion"></span>Suggestions</div>
+            </div>
+            <div class="stat-cell">
+                <div class="stat-num" id="appreciationCount">0</div>
+                <div class="stat-lbl"><span class="stat-dot dot-appreciation"></span>Appreciations</div>
+            </div>
+        </div>
+
+        <!-- Post Form -->
+        <div class="post-form" id="post-form">
+            <div class="form-title">Submit your post</div>
+            <div class="form-row">
+                <label>Type of post</label>
+                <div class="type-selector" id="typeSelector">
+                    <button class="type-pill selected" data-type="Complaint">Complaint</button>
+                    <button class="type-pill" data-type="Suggestion">Suggestion</button>
+                    <button class="type-pill" data-type="Appreciation">Appreciation</button>
+                </div>
+            </div>
+            <div class="form-row-grid">
+                <div class="form-row" style="margin-bottom:0">
+                    <label>Your name (optional)</label>
+                    <input class="form-input" id="inputName" placeholder="Anonymous" />
+                </div>
+                <div class="form-row" style="margin-bottom:0">
+                    <label>Constituency</label>
+                    <select class="form-select" id="inputConst">
+                        <option>Kolhapur North</option>
+                        <option>Kolhapur South</option>
+                        <option>Karveer</option>
+                        <option>Panhala</option>
+                        <option>Shahuwadi</option>
+                        <option>Kagal</option>
+                        <option>Gadhinglaj</option>
+                        <option>Radhanagari</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row" style="margin-top:1rem">
+                <label>Subject</label>
+                <input class="form-input" id="inputSubject" placeholder="Brief subject line…" />
+            </div>
+            <div class="form-row">
+                <label>Your message</label>
+                <textarea class="form-textarea" id="inputMessage" placeholder="Write your complaint, suggestion, or appreciation in detail…"></textarea>
+            </div>
+            <button class="submit-btn" id="submitBtn">Submit post →</button>
+        </div>
+
+        <!-- Posts Feed -->
+        <div class="posts-section">
+            <div class="filter-bar" id="filterBar">
+                <span class="filter-label">Filter:</span>
+                <button class="filter-chip active" data-filter="all">All</button>
+                <button class="filter-chip" data-filter="Complaint">Complaints</button>
+                <button class="filter-chip" data-filter="Suggestion">Suggestions</button>
+                <button class="filter-chip" data-filter="Appreciation">Appreciations</button>
+                <input class="search-input" id="searchInput" placeholder="Search posts…" />
+            </div>
+            <h2 id="feedTitle">Public Record</h2>
+            <div id="postsFeed"></div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">Post submitted to the public record</div>
+
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html>
